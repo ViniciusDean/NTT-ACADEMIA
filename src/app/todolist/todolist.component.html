@@ -1,0 +1,40 @@
+<div class="container">
+
+    <h1>NTT TO-DO-LIST
+        <img src="assets/image/logo.png"
+        height='40px'>
+    </h1>
+
+    <hr>
+    <form id="enviar"(ngSubmit)="onSubmit(taskForm)" #taskForm="ngForm">
+        <div class="form-group">
+            <input type="text" class="form-control" id="task" placeholder="Envie a tarefa" ngModel name="task" required>
+            <small *ngIf="taskForm.invalid && taskForm.dirty" id="errorMessage" class="form-text text-danger">Required
+                field</small>
+        </div>
+
+        <button [disabled]="taskForm.invalid" id="submitButton" type="submit" class="btn btn-outline-primary">Enviar</button>
+    </form>
+
+    <hr>
+
+    <table id ="acao" class="table">
+        <thead>
+            <tr>
+                <th scope="col">Tarefa</th>
+                <th scope="col">Completada</th>
+                <th scope="col">Deletar</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let t of taskArray; index as i">
+                <td>
+                    <input type="text" class="form-control" id="tarefaLista" value="{{t.taskName}}" readonly>
+                    </td>
+                <td><input (change)="onCheck(i)" id="myCheckbox" type="checkbox"></td>
+                <td><button class="btn btn-danger btn-sm" (click)="onDelete(i)">Deletar</button></td>
+            </tr>
+
+        </tbody>
+    </table>
+</div>
